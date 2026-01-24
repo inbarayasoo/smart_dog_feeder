@@ -31,7 +31,7 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
 * XXXX - version XXXXX
 
 ## Connection diagram:
-![Connection diagram](./Assets/diagram.png)
+![Connection diagram](./Assets/diagram.jpeg)
 ## Project Poster:
 
 ![Poster of the project](./Assets/poster.png)
