@@ -26,27 +26,35 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
 ## ESP32 SDK version used in this project: 
 
 ## Arduino/ESP32 libraries used in this project:
-* XXXX - version XXXXX
-* XXXX - version XXXXX
-* XXXX - version XXXXX
+
+
+* AccelStepper by Mike McCauley - version 1.64
+
+* Adafruit BusIO by Adafruit - version 1.17.4
+
+* Adafruit DMA neopixel library by Adafruit - version 1.3.3
 
 * Adafruit GFX Library by Adafruit - version 1.12.4
 
-Library Name,Author,Version
-AccelStepper,Mike McCauley,1.64
-Adafruit BusIO,Adafruit,1.17.4
-Adafruit DMA neopixel library,Adafruit,1.3.3
-Adafruit GFX Library,Adafruit,1.12.4
-Adafruit NeoPixel,Adafruit,1.15.2
-Adafruit SH110X,Adafruit,2.1.14
-Adafruit SSD1306,Adafruit,2.5.15
-Adafruit_VL53L0X,Adafruit,1.2.4
-ArduinoJson,Benoit Blanchon,7.4.2
-ESP_SSLClient,Mobizt,3.1.2
-Firebase ESP32 Client,Mobizt,4.4.17
-FirebaseClient,Mobizt,2.2.5
-HX711,Rob Tillaart,0.6.3
-WiFiManager,tzapu,2.0.17
+* Adafruit NeoPixel by Adafruit - version 1.15.2
+
+* Adafruit SH110X by Adafruit - version 2.1.14
+
+* Adafruit SSD1306 by Adafruit - version 2.5.15
+
+* Adafruit_VL53L0X by Adafruit - version 1.2.4
+
+* ArduinoJson by Benoit Blanchon - version 7.4.2
+
+* ESP_SSLClient by Mobizt - version 3.1.2
+
+* Firebase ESP32 Client by Mobizt - version 4.4.17
+
+* FirebaseClient by Mobizt - version 2.2.5 
+
+* HX711 by Rob Tillaart - version 0.6.3
+
+* WiFiManager by tzapu - version 2.0.17
 
 ## Connection diagram:
 ![Connection diagram](./Assets/diagram.jpeg)
