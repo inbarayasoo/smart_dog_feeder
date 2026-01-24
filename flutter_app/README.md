@@ -1,6 +1,6 @@
-# flutter_application_1
+# smart pet feeder
 
-A new Flutter project.
+A part of ICST-Technion projects
 
 ## Getting Started
 
