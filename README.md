@@ -31,8 +31,10 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
 * XXXX - version XXXXX
 
 ## Connection diagram:
-
+![Connection diagram](./Assets/diagram.png)
 ## Project Poster:
+
+![Poster of the project](./Assets/poster.png)
  
 This project is part of ICST - The Interdisciplinary Center for Smart Technologies, Taub Faculty of Computer Science, Technion
 https://icst.cs.technion.ac.il/
