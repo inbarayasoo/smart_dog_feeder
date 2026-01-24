@@ -1,0 +1,162 @@
+#ifndef PARAMETERS_H
+#define PARAMETERS_H
+
+#include <stdint.h>
+
+/* =================================================================================
+   FILE: main.ino
+   Main logic settings for feeding, scheduling, and safety limits.
+   ================================================================================= */
+
+// Button Pin
+#define FEED_BUTTON_PIN 15           // GPIO pin for the manual feed button (Input Pullup).
+
+// Feeding Logic
+static const float FEED_PORTION_GRAMS = 7.0f;       // The default weight (in grams) to dispense when the button is pressed.
+static const int REQUIRED_ABOVE_TARGET = 2;         // How many consecutive weight readings must be >= target before stopping (prevents stopping on noise).
+static const unsigned long FEED_TIMEOUT_MS = 30000; // Safety: Max time (ms) the motor can run before force-stopping to prevent overheating/overflow.
+
+// Container & Empty Detection
+static const unsigned long CONTAINER_STATUS_PUBLISH_RETRY_MS = 5000; // How often (ms) to retry sending the "Container Empty" alert to Firebase if it fails.
+static const unsigned long EMPTY_STABLE_MS = 800;   // Debounce time (ms): The container must be detected as empty for this long to confirm it's truly empty.
+
+// Final Weight Capture
+static const unsigned long FINAL_WEIGHT_SETTLE_MS = 700;     // Time (ms) to wait after motor stop before reading the final weight (lets the scale stabilize).
+static const unsigned long FINAL_WEIGHT_MAX_WAIT_MS = 6000;  // Safety watchdog (ms): If the motor stop signal isn't detected within this time, force a weight read.
+
+// Offline Mode & Queue
+static const unsigned long QUEUE_SYNC_INTERVAL_MS = 10000;   // How often (ms) to try uploading offline feeding logs to Firebase when connection is restored.
+static const uint32_t OFFLINE_INTERVAL_MS      = 60UL * 1000UL; // Interval (ms) between automatic feedings when offline (Default: 60s for testing).
+static const uint32_t OFFLINE_REBOOT_SAFETY_MS = 10UL * 1000UL; // Safety delay (ms) after a reboot in offline mode before the first feed.
+static const unsigned long OPEN_PORTAL_AFTER_MS = 100UL * 1000UL; // Time (ms) of no WiFi before opening the config portal again (Default: 100s).
+static const unsigned long MOTOR_DONE_STABLE_MS = 400;       // Time (ms) to ensure motor is fully stopped before allowing portal operations.
+
+// Motor Recovery (Jam Clearing)
+static const unsigned long RECOVERY_STEPS_PER_REV_EFFECTIVE = 800; // Steps per revolution used for calculating recovery timing.
+static const unsigned long RECOVERY_SPEED_STEPS_PER_SEC     = 350; // Speed (steps/sec) used during the back-and-forth jam clearing motion.
+static const int TIMEOUT_RECOVERY_MAX = 1;                   // Max number of times to try the "wiggle" recovery if a jam is detected.
+
+
+/* =================================================================================
+   FILE: MotorManager.cpp
+   Stepper motor hardware pins and movement physics.
+   ================================================================================= */
+
+// Pins
+#define STEP_PIN 2     // GPIO pin connected to the STEP pin of the A4988 driver.
+#define DIR_PIN  5     // GPIO pin connected to the DIR pin of the A4988 driver.
+
+// Physics & Speed
+static const float MOTOR_SPEED_STEPS_PER_SEC = -350.0;   // Speed in steps/sec. Negative value indicates direction. (Start conservative).
+static const long  CONTINUOUS_TARGET        = -2000000000L; // A very large number to simulate "continuous" running until manually stopped.
+static const long STEPS_PER_REV_EFFECTIVE = 3200;        // Steps per full revolution (200 steps * 16 microsteps). Used for relative moves.
+
+
+/* =================================================================================
+   FILE: ScaleManager.cpp
+   Load cell (HX711) calibration and timing.
+   ================================================================================= */
+
+// Pins
+#define LOADCELL_DOUT_PIN  16   // GPIO pin for HX711 Data (DT).
+#define LOADCELL_SCK_PIN   4    // GPIO pin for HX711 Clock (SCK).
+
+// Calibration
+static const float CALIBRATION_FACTOR = 989.1836735f;  // The specific calibration value for your load cell to convert raw data to grams.
+
+// Timing
+static const unsigned long WEIGHT_READ_INTERVAL_MS = 100;  // How often (ms) to read a new value from the scale.
+
+
+/* =================================================================================
+   FILE: PixelManager.cpp
+   NeoPixel (LED) display settings.
+   ================================================================================= */
+
+// Pins & Config
+#define NEOPIXEL_PIN 12      // GPIO pin connected to the Data In of the NeoPixel.
+#define NUM_PIXELS   12      // Total number of LEDs in the ring/strip.
+#define WIFI_PIXEL_INDEX 0   // The specific LED index (0-11) used to indicate WiFi status (Blue).
+
+// Animation
+static const unsigned long BLINK_INTERVAL_MS = 300; // Speed of the blinking effect (ms) for alerts.
+
+
+/* =================================================================================
+   FILE: DistanceManager.cpp
+   VL53L0X distance sensor settings for food level detection.
+   ================================================================================= */
+
+// Pins (I2C)
+// Note: Wire.begin(21, 22) is hardcoded in InitDistance(). 
+// 21 = SDA, 22 = SCL (Standard ESP32 I2C pins).
+
+// Thresholds
+static const uint16_t EMPTY_THRESHOLD_MM = 74;        // Distance (mm). If sensor reads > 74mm, container is considered empty.
+
+// Timing
+static const unsigned long MEASURE_INTERVAL_MS = 200;  // How often (ms) to check the distance sensor.
+
+
+/* =================================================================================
+   FILE: LocalManager.cpp
+   Settings for saving data to the ESP32's internal flash memory (LittleFS).
+   ================================================================================= */
+
+// File Paths
+static const char* SCHEDULE_FILE = "/schedule_cache.json";       // File to store the feeding schedule locally.
+static const char* SCHEDULE_CRC_FILE = "/schedule_cache.crc";    // File to store the checksum (to detect changes).
+static const char* WEIGHTS_QUEUE_FILE = "/weights_queue.jsonl";  // File to queue feeding logs when offline.
+static const char* WEIGHTS_PRUNE_META = "/weights_prune_meta.json"; // File to track when we last cleaned up old logs.
+
+// Maintenance
+static const uint32_t PRUNE_INTERVAL_SEC = 24UL * 60UL * 60UL;        // How often (seconds) to check for old logs to delete (24 hours).
+static const uint32_t KEEP_WINDOW_SEC    = 7UL  * 24UL * 60UL * 60UL; // Retention period (seconds). Logs older than 7 days are deleted.
+static const unsigned long LOCAL_PARSE_THROTTLE_MS = 5000;            // Limits how often (ms) we re-parse the local schedule file to save CPU.
+
+
+/* =================================================================================
+   FILE: FirebaseManager.cpp
+   Settings for database paths and syncing.
+   ================================================================================= */
+
+// Database Paths
+static const char* kContainerStatusPath = "/status/container"; // RTDB path for container status.
+
+// Syncing
+static const unsigned long FETCH_INTERVAL_MS = 15UL * 1000UL;  // How often (ms) to check Firebase for schedule updates (15 seconds).
+
+
+/* =================================================================================
+   FILE: WifiConnector.cpp
+   WiFi connection and setup portal settings.
+   ================================================================================= */
+
+// Device Info
+static const char* DEVICE_ID = "PET_FEEDER_001"; // Name used in logs/identification.
+
+// Access Point (Setup Mode)
+static const char* AP_SSID = "Feeder_Setup";     // Name of the WiFi network the ESP32 creates for setup.
+static const unsigned long TIMEOUT_MS = 30000;   // Timeout (ms) for the config portal before it shuts down.
+
+// Reconnection
+static const unsigned long RECONNECT_INTERVAL_MS = 5000; // How often (ms) to try reconnecting if WiFi is lost.
+
+
+/* =================================================================================
+   FILE: NtpManager.cpp
+   Time synchronization settings.
+   ================================================================================= */
+
+// Servers
+static const char* NTP_SERVER   = "pool.ntp.org";       // Primary time server.
+static const char* NTP_SERVER_2 = "ntp.technion.ac.il"; // Secondary time server (Technion).
+
+// Timezone
+static const long GMT_OFFSET_SEC = 7200; // Offset from UTC in seconds (UTC+2 for Israel Standard Time).
+static const int  DST_OFFSET_SEC = 0;    // Daylight Savings Time offset (currently 0).
+
+// Timing
+static const unsigned long NTP_SERVER_TIMEOUT_MS = 1000; // Max wait time (ms) per server before trying the next one.
+
+#endif // PARAMETERS_H
