@@ -2,7 +2,7 @@
 #define FIREBASEMANAGER_H
 
 #include <stddef.h>
-#include <stdint.h>  // ✅ for int32_t
+#include <stdint.h>  // for int32_t
 
 void initFirebase();
 void firebaseLoop();
@@ -47,7 +47,7 @@ bool update_weight(int amount_grams,
 
 bool firebasePublishContainerEmpty(bool emptyNow);
 
-// ❌ Removed from your FirebaseManager.cpp (so keeping this causes linker errors)
+//  Removed from your FirebaseManager.cpp (so keeping this causes linker errors)
 // bool firebasePublishFeedingStartEventId(int32_t eventId);
 
 bool firebaseIsDatabaseConnected();
