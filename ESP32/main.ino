@@ -624,7 +624,7 @@ void updateMotorAndFeeding() {
 
         pendingFinalWeight = true;
         motorStoppedAtMs = 0;
-        pendingFinalWeightSinceMs = millis(); // ✅ FIX 3: start watchdog timer
+        pendingFinalWeightSinceMs = millis(); // start watchdog timer
 
         if (currentFeedingEventId < 0) { currentFeedingEventId = makeEventIdEpochSecondsLocal(); }
 
@@ -674,7 +674,7 @@ void updateMotorAndFeeding() {
           feedingStopNotified = true;
 
           currentFeedingEventId = -1;
-          Serial.println("⚠️ Timeout reached (max recoveries) -> motor stopping");
+          Serial.println(" Timeout reached (max recoveries) -> motor stopping");
           break;
         }
 
@@ -682,7 +682,7 @@ void updateMotorAndFeeding() {
         weightAtTimeout = currentWeightGramsRecieved;
         aboveTargetCount = 0;
 
-        Serial.printf("⚠️ Timeout reached -> recovery wiggle %d/%d (weight=%.1f, target=%.1f)\n",
+        Serial.printf(" Timeout reached -> recovery wiggle %d/%d (weight=%.1f, target=%.1f)\n",
                       timeoutRecoveryCount, TIMEOUT_RECOVERY_MAX,
                       weightAtTimeout, feedTargetWeightGrams);
 
@@ -714,7 +714,7 @@ void loop() {
     if (pendingFinalWeightSinceMs != 0 &&
         (millis() - pendingFinalWeightSinceMs) > FINAL_WEIGHT_MAX_WAIT_MS) {
 
-      Serial.println("⚠️ Final-weight watchdog: motorMoveDone() didn't happen -> forcing final weight capture");
+      Serial.println(" Final-weight watchdog: motorMoveDone() didn't happen -> forcing final weight capture");
 
       // Best effort: ensure stop command, then read weight anyway
       stopMotor();
@@ -765,7 +765,7 @@ void loop() {
 
           pendingFinalWeight = false;
           motorStoppedAtMs = 0;
-          pendingFinalWeightSinceMs = 0; // ✅ FIX 3: clear watchdog timer
+          pendingFinalWeightSinceMs = 0; // clear watchdog timer
 
           Serial.print(" Final weight captured: ");
           Serial.println(prev_currentWeightGramsRecieved);
