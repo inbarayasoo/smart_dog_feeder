@@ -16,7 +16,7 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
     Blue LED when there is no Wi-Fi connection, providing immediate offline indication without opening the app.
  
 ## Folder description :
-* ESP32: source code for the esp side (firmware).
+* ESP32: source code for the esp side (firmware). note, the passwords zip contains the passwords for secrets file, the password for it is the same password of the lab's wifi
 * Documentation: wiring diagram + basic operating instructions + Parameters file: contains description of hardcoded parameters and settings 
 * Unit Tests: tests for individual hardware components (input / output devices)
 * flutter_app : dart code for our Flutter app.
