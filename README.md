@@ -14,6 +14,7 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
 * LED Status Indicators:
     Red LED when the food container is empty.
     Blue LED when there is no Wi-Fi connection, providing immediate offline indication without opening the app.
+* Project's video: https://drive.google.com/file/d/1gUalj8nWd8bQKKFN0XsxHR5caQaMPUtT/view?usp=sharing
  
 ## Folder description :
 * ESP32: source code for the esp side (firmware). note, the passwords zip contains the passwords for secrets file, the password for it is the same password of the lab's wifi. the binary file
