@@ -206,7 +206,7 @@ static bool pruneWeightsQueueIfDue() {
   LittleFS.rename("/weights_queue.tmp", WEIGHTS_QUEUE_FILE);
 
   (void)saveLastPruneTs(now);
-  Serial.println("[Local] ✅ Weights queue pruned (kept last 7 days, checked every 24h)");
+  Serial.println("[Local] Weights queue pruned (kept last 7 days, checked every 24h)");
   return true;
 }
 
@@ -492,7 +492,7 @@ static bool parseLocalScheduleJson(const String &json) {
     }
   }
 
-  Serial.println("[Local] ✅ Schedule loaded from cache:");
+  Serial.println("[Local]  Schedule loaded from cache:");
   for (int i = 0; i < 6; i++) {
     if (!g_localSchedule[i].enabled) {
       Serial.printf("[Local] #%d: (disabled)\n", i);
