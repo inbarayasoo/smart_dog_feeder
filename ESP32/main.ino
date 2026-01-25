@@ -185,18 +185,18 @@ static bool isDuplicateScheduledMinute(const char* meal, int hh, int mm) { //mak
 
 // -------------------- Offline interval feeding policy --------------------
 // (Currently short values for testing)
-static const uint32_t OFFLINE_INTERVAL_MS      = 60UL * 1000UL;    // 30 seconds (testing)
-static const uint32_t OFFLINE_REBOOT_SAFETY_MS = 10UL * 1000UL;  // 60 seconds (testing)
+static const uint32_t OFFLINE_INTERVAL_MS      = 60UL * 1000UL;    
+static const uint32_t OFFLINE_REBOOT_SAFETY_MS = 10UL * 1000UL;  
 static uint32_t nextOfflineFeedMs = 0;
 
 // -------------------- AUTO portal policy --------------------
 static unsigned long offlineSinceMs = 0;
-static const unsigned long OPEN_PORTAL_AFTER_MS = 100UL * 1000UL; // 10 seconds (testing)
+static const unsigned long OPEN_PORTAL_AFTER_MS = 100UL * 1000UL; 
 
 
 static bool portalPending = false;
 static unsigned long motorDoneSinceMs = 0;
-static const unsigned long MOTOR_DONE_STABLE_MS = 400; // tweak 200–1000
+static const unsigned long MOTOR_DONE_STABLE_MS = 400;
 
 // Firebase init tracking
 static bool ntpValid = false;
@@ -624,7 +624,7 @@ void updateMotorAndFeeding() {
 
         pendingFinalWeight = true;
         motorStoppedAtMs = 0;
-        pendingFinalWeightSinceMs = millis(); // start watchdog timer
+        pendingFinalWeightSinceMs = millis(); 
 
         if (currentFeedingEventId < 0) { currentFeedingEventId = makeEventIdEpochSecondsLocal(); }
 
@@ -674,7 +674,7 @@ void updateMotorAndFeeding() {
           feedingStopNotified = true;
 
           currentFeedingEventId = -1;
-          Serial.println(" Timeout reached (max recoveries) -> motor stopping");
+          Serial.println("Timeout reached (max recoveries) -> motor stopping");
           break;
         }
 
@@ -682,7 +682,7 @@ void updateMotorAndFeeding() {
         weightAtTimeout = currentWeightGramsRecieved;
         aboveTargetCount = 0;
 
-        Serial.printf(" Timeout reached -> recovery wiggle %d/%d (weight=%.1f, target=%.1f)\n",
+        Serial.printf("Timeout reached -> recovery wiggle %d/%d (weight=%.1f, target=%.1f)\n",
                       timeoutRecoveryCount, TIMEOUT_RECOVERY_MAX,
                       weightAtTimeout, feedTargetWeightGrams);
 
@@ -714,7 +714,7 @@ void loop() {
     if (pendingFinalWeightSinceMs != 0 &&
         (millis() - pendingFinalWeightSinceMs) > FINAL_WEIGHT_MAX_WAIT_MS) {
 
-      Serial.println(" Final-weight watchdog: motorMoveDone() didn't happen -> forcing final weight capture");
+      Serial.println("Final-weight watchdog: motorMoveDone() didn't happen -> forcing final weight capture");
 
       // Best effort: ensure stop command, then read weight anyway
       stopMotor();
@@ -765,7 +765,7 @@ void loop() {
 
           pendingFinalWeight = false;
           motorStoppedAtMs = 0;
-          pendingFinalWeightSinceMs = 0; // clear watchdog timer
+          pendingFinalWeightSinceMs = 0; 
 
           Serial.print(" Final weight captured: ");
           Serial.println(prev_currentWeightGramsRecieved);
@@ -907,8 +907,8 @@ void loop() {
       motorDoneSinceMs = 0;
       offlineSinceMs = 0;
 
-      // Important: do NOT stop motor here. It's already stopped.
-      // Also clear any stale scheduled request before blocking.
+      
+      
       clearScheduledFeedRequest("before portal (deferred)");
 
       bool ok = setupWiFiProvisioning(); // BLOCKING portal
