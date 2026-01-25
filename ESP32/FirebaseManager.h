@@ -47,8 +47,7 @@ bool update_weight(int amount_grams,
 
 bool firebasePublishContainerEmpty(bool emptyNow);
 
-//  Removed from your FirebaseManager.cpp (so keeping this causes linker errors)
-// bool firebasePublishFeedingStartEventId(int32_t eventId);
+
 
 bool firebaseIsDatabaseConnected();
 
