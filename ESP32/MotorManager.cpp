@@ -8,8 +8,8 @@
 
 AccelStepper stepper(AccelStepper::DRIVER, STEP_PIN, DIR_PIN);
 
-// IMPORTANT: start conservative for torque, then increase later if stable.
-const float MOTOR_SPEED_STEPS_PER_SEC = -350.0;   // try -350 first, then -400/-450
+
+const float MOTOR_SPEED_STEPS_PER_SEC = -350.0;   
 const long  CONTINUOUS_TARGET        = -2000000000L;
 
 volatile bool stop_motor = false;
@@ -17,8 +17,8 @@ bool is_motor_running = false;
 
 void initMotor() {
   // Conservative settings to reduce stalls
-  stepper.setMaxSpeed(450);      // try 350–600 based on stability
-  stepper.setAcceleration(200);  // try 100–600 based on stability
+  stepper.setMaxSpeed(450);      
+  stepper.setAcceleration(200);  
   stepper.setCurrentPosition(0);
 }
 
@@ -30,7 +30,7 @@ static void startMotorToTarget(long target) {
 
   stepper.setMaxSpeed(fabs(MOTOR_SPEED_STEPS_PER_SEC));
 
-  // Critical: prevent (target - current) overflow when we reverse direction after long runs.
+  
   stepper.setCurrentPosition(0);
 
   stepper.moveTo(target);
@@ -68,8 +68,7 @@ void updateMotor() { //change motor speed
   //stepper.runSpeed(); // generates steps based on setSpeed()
 }
 
-// Adjust this based on your driver microstepping.
-// If microstepping is 1/16 -> 200 * 16 = 3200 steps per rev.
+
 static const long STEPS_PER_REV_EFFECTIVE = 3200;
 
 void startMotorRelativeSteps(long deltaSteps) { //helper for revesing the motor

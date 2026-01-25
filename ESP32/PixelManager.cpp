@@ -57,7 +57,7 @@ void neoNoWifiOnlyPattern() { //neopixel only wifi alert mode
 }
 
 // ---------- Main update function ----------
-// Call from loop():
+
 // updateNeoPixel(containerEmpty, WiFi.status() == WL_CONNECTED);
 void updateNeoPixel(bool containerEmpty, bool wifiConnected) { // change the LEDs according to situation
   unsigned long now = millis();

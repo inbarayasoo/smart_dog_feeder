@@ -1,6 +1,6 @@
 #include "LocalManager.h"
 #include <LittleFS.h>
-#include <Arduino.h>   // <-- REQUIRED for String, size_t, etc.
+#include <Arduino.h>  
 #include <FS.h>
 #include <ArduinoJson.h>
 #include <time.h>

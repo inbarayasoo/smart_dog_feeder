@@ -1,6 +1,3 @@
-// FirebaseManager.cpp  (was your firebase.cpp)
-// Updated: daily meal notifications under /logs/meal_notifications/YYYY-MM-DD/{idx}
-// Removed: /status/feedingStartEventId publisher
 
 #define ENABLE_USER_AUTH
 #define ENABLE_DATABASE
@@ -18,7 +15,7 @@
 #include "LocalManager.h"
 #include "Secrets.h"
 
-// Firebase
+
 
 // Auth + Firebase objects
 UserAuth user_auth(Web_API_KEY, USER_EMAIL, USER_PASS);
@@ -639,9 +636,8 @@ bool firebaseIsDatabaseConnected() { //check if we are connected to firebase
   if (WiFi.status() != WL_CONNECTED) {
     return false;
   }
-  return true; // the rest of the function doesnt work properly
-
-  // (your old probe logic below is intentionally left unreachable, as in your original file)
+  return true; 
+  
   static unsigned long lastProbeMs = 0;
   bool lastResult = true;
   const unsigned long PROBE_INTERVAL_MS = 5000;

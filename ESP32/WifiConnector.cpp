@@ -45,7 +45,7 @@ void configModeCallback(WiFiManager *myWiFiManager) {
 /**
  * BOOT / DEMO MODE:
  * Always show portal, always ask for credentials.
- * (This matches your requirement for setup()).
+ * (This matches requirement for setup()).
  */
 bool setupWiFiProvisioning() {
   WiFi.onEvent(onWiFiEvent);
@@ -54,13 +54,12 @@ bool setupWiFiProvisioning() {
   wm.setAPCallback(configModeCallback);
   wm.setConfigPortalTimeout(TIMEOUT_MS / 1000);
 
-  // Optional but recommended so WiFiManager doesn't keep trying old stuff first
-  // and so your demo ALWAYS latest credentials:
+
   wm.setBreakAfterConfig(true);
 
-  Serial.println("📡 DEMO BOOT: Opening config portal (always) ...");
+  Serial.println("DEMO BOOT: Opening config portal (always) ...");
 
-  // IMPORTANT: use your AP_SSID/AP_PASS (instead of MyDevice-Setup)
+ 
   bool ok = wm.startConfigPortal(AP_SSID, AP_PASS);
   if (!ok) {
     Serial.println("Config portal timed out / failed");

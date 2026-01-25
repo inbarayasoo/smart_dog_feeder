@@ -2,7 +2,7 @@
 #define FIREBASEMANAGER_H
 
 #include <stddef.h>
-#include <stdint.h>  // for int32_t
+#include <stdint.h>  
 
 void initFirebase();
 void firebaseLoop();
@@ -26,16 +26,7 @@ bool firebaseGetDueFeeding(int &amountOut,
 
 void firebaseSetContainerEmpty(bool empty);
 
-// Upload a single unified meal-weight entry (NEW format expected by Flutter):
-// {
-//   "amount_grams": 50,
-//   "prev_current_weight": 50,
-//   "new_current_weight": 20,
-//   "date": "2026-01-04",
-//   "day": "sunday",
-//   "hour": "09:58",
-//   "meal_name": "breakfast"...
-// }
+
 bool update_weight(int amount_grams,
                    int feed_hour,
                    int feed_minute,
