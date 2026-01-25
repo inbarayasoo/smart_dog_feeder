@@ -4,7 +4,7 @@
 
 // ---------- VL53L0X distance sensor configuration ----------
 Adafruit_VL53L0X lox;
-const uint16_t EMPTY_THRESHOLD_MM = 74;        // 14 cm = 140 mm (container considered empty above this)
+const uint16_t EMPTY_THRESHOLD_MM = 74;        
 bool containerIsEmpty = false;
 uint16_t distance_mm =0;
 
