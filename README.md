@@ -46,7 +46,7 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
 
 * Adafruit SH110X by Adafruit - version 2.1.14
 
-* Adafruit SSD1306 by Adafruit - version 2.5.15
+* Adafruit SSD1306 by Adafruit - version 2.5.16
 
 * Adafruit_VL53L0X by Adafruit - version 1.2.4
 
@@ -56,7 +56,7 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
 
 * Firebase ESP32 Client by Mobizt - version 4.4.17
 
-* FirebaseClient by Mobizt - version 2.2.5 
+* FirebaseClient by Mobizt - version 2.2.7
 
 * HX711 by Rob Tillaart - version 0.6.3
 
