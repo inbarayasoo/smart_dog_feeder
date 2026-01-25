@@ -8,7 +8,7 @@
 #define LOADCELL_SCK_PIN   4    // HX711 SCK
 
 HX711 scale;
-const float CALIBRATION_FACTOR = 989.1836735f;  // Your calibration factor
+const float CALIBRATION_FACTOR = 989.1836735f; 
 bool scaleReady = false;
 
 
@@ -55,7 +55,7 @@ void updateWeight() {// measure weight on the plate
 
   if (scale.is_ready()) {
     // Single sample + simple low-pass filter to smooth out vibrations/noise
-    float raw = scale.get_units(5);  // 1 sample
+    float raw = scale.get_units(5);  
     currentWeightGrams = 0.7f * currentWeightGrams + 0.3f * raw;
     //currentWeightGrams = raw;
     //Serial.println(scale.is_ready() ? "HX711 READY" : "HX711 NOT READY");
@@ -87,5 +87,5 @@ void reZeroScale() { //reset the scales to minimize weight error
   if (!scale.is_ready()) return;
 
   scale.tare(20);          // set new offset at current load
-  currentWeightGrams = 0.0f;    // IMPORTANT: reset your low-pass filter state
+  currentWeightGrams = 0.0f;    
 }
