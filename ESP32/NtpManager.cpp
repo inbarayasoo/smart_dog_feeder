@@ -3,7 +3,7 @@
 #include "NtpManager.h"
 #include <time.h>
 #include <Arduino.h>
-#include <WiFi.h>   // ✅ use real WiFi status
+#include <WiFi.h>  
 #include "Secrets.h"
 
 // --- Time Configuration ---
