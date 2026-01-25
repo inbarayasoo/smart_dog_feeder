@@ -44,8 +44,6 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
 
 * Adafruit NeoPixel by Adafruit - version 1.15.2
 
-* Adafruit SH110X by Adafruit - version 2.1.14
-
 * Adafruit SSD1306 by Adafruit - version 2.5.16
 
 * Adafruit_VL53L0X by Adafruit - version 1.2.4
