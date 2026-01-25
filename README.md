@@ -23,13 +23,13 @@ An IoT smart pet feeder that automates scheduled and manual feeding with real-ti
 * Parameters: contains description of parameters and settings that can be modified IN YOUR CODE
 * Assets: pictures used in our project
 ## ESP32 SDK version used in this project: 
-
+2.0.17
 ## Hardware list:
 
-* Strain (weight) sensor + HX711 ADC converter
-* stepper driver + motor
-* laser TOF distance sensor -  VL53lx0
-* NeoPixel (RGB LED)
+* 1 Strain (weight) sensor + 1 HX711 ADC converter
+* 1 stepper driver + 1 motor
+* 1 laser TOF distance sensor -  VL53lx0
+* 1 Ring NeoPixel (RGB LED)
 
 
 ## Arduino/ESP32 libraries used in this project:
