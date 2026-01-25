@@ -3,7 +3,7 @@
 
 
 
-const char* AP_PASS = "";
+constexpr const char* AP_PASS = "";
 #define Web_API_KEY     ""
 #define DATABASE_URL    "" 
 #define USER_EMAIL      ""
